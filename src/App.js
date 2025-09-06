@@ -5,24 +5,28 @@ import Cart from "./pages/Cart";
 import Forecast from "./pages/Forecast";
 import NavComponent from "./components/Navcomponent";
 import Product from "./pages/Product";
-
+import STATE from "./Context/initState";
+import { GlobalProvider } from "./Context/Context";
+import { useState } from "react";
 function App() {
-  
+  const [data,setData] = useState(STATE);
   return (
-    <div className="App">
-       <NavComponent />
-       <main>
-        <div className="container">
-            <Routes>
-                <Route path="/" Component={Home} />
-                <Route path="/category/:slug" Component={Category} />
-                <Route path="/product/:id" Component={Product} />
-                <Route path="/cart" Component={Cart} />
-                <Route path="/forecast" Component={Forecast} />
-            </Routes>
-        </div>
-       </main>
-    </div>
+    <GlobalProvider value={{data,setData}}>
+      <div className="App">
+        <NavComponent />
+        <main>
+          <div className="container">
+              <Routes>
+                  <Route path="/" Component={Home} />
+                  <Route path="/category/:slug" Component={Category} />
+                  <Route path="/product/:id" Component={Product} />
+                  <Route path="/cart" Component={Cart} />
+                  <Route path="/forecast" Component={Forecast} />
+              </Routes>
+          </div>
+        </main>
+      </div>
+    </GlobalProvider>
   );
 }
 
